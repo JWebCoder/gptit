@@ -52,7 +52,6 @@
 
     .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; }
     .logo span { background: linear-gradient(120deg, #22d3ee, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .chip { color: var(--muted); font-size: 0.9rem; }
 
     h1 { margin: 8px 0; font-size: 1.3rem; }
     p { margin: 6px 0 14px; color: var(--muted); }
@@ -142,7 +141,6 @@
   <div class="shell">
     <header>
       <div class="logo"><span>gptit</span></div>
-      <div class="chip">letmechatgptthat.com</div>
     </header>
 
     <div id="home" hidden>
@@ -166,8 +164,6 @@
     </div>
 
     <div id="demo" hidden>
-      <h1>Demo gptit</h1>
-      <p>Reprodução rápida do percurso. O botão abre o ChatGPT numa nova aba.</p>
       <div class="demo-box">
         <div class="status"><strong>Status:</strong> <span id="status">A preparar…</span></div>
         <div class="timeline"><div class="fill" id="fill"></div></div>
