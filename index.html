@@ -9,12 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;
-      --panel: #0b1324;
-      --border: #1e293b;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --accent: #22d3ee;
+      --bg: #0b0c10;
+      --surface: #0f1117;
+      --panel: #131720;
+      --border: #1c2330;
+      --text: #e8ecf2;
+      --muted: #9aa4b5;
+      --accent: #10a37f;
+      --input: #0c1016;
     }
 
     * { box-sizing: border-box; }
@@ -22,45 +24,91 @@
     body {
       margin: 0;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.08), transparent 20%),
-                  radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.06), transparent 18%),
-                  var(--bg);
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 24px;
+      padding: 18px;
     }
 
-    .shell {
-      width: min(900px, 100%);
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    .app {
+      width: min(1080px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      padding: 6px 8px;
     }
 
-    .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; }
-    .logo span { background: linear-gradient(120deg, #22d3ee, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--text);
+    }
 
-    h1 { margin: 8px 0; font-size: 1.3rem; }
-    p { margin: 6px 0 14px; color: var(--muted); }
+    .logo span {
+      background: linear-gradient(120deg, #10a37f, #9f7aea, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    .chat-window {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+    }
+
+    .chat-messages {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .message {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .bubble {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      line-height: 1.4;
+      width: 100%;
+    }
+
+    .bubble.system { color: var(--muted); background: rgba(255,255,255,0.02); }
+    .bubble.user { background: #141a23; border-color: #243144; }
+
+    .composer {
+      border-top: 1px solid var(--border);
+      padding: 14px 18px;
+      display: grid;
+      gap: 10px;
+      background: var(--surface);
+    }
+
     textarea {
       width: 100%;
-      min-height: 140px;
-      background: rgba(255, 255, 255, 0.03);
+      min-height: 120px;
+      background: var(--input);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 12px;
@@ -69,38 +117,37 @@
       resize: vertical;
     }
 
-    textarea:focus { outline: 2px solid rgba(34, 211, 238, 0.4); border-color: rgba(34, 211, 238, 0.8); }
+    textarea:focus { outline: 2px solid rgba(16, 163, 127, 0.4); border-color: rgba(16, 163, 127, 0.8); }
 
-    .buttons { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
     button, .ghost {
       border: 1px solid var(--border);
-      background: linear-gradient(120deg, rgba(34, 211, 238, 0.3), rgba(168, 85, 247, 0.2));
+      background: #18202c;
       color: var(--text);
       padding: 10px 14px;
       border-radius: 12px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 120ms ease, box-shadow 120ms ease;
+      transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
     }
 
-    button.secondary { background: rgba(255, 255, 255, 0.03); }
-    button:hover, .ghost:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.28); }
+    button.secondary { background: #0f141c; }
+    button:hover, .ghost:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); border-color: #2f3a4d; }
 
     .link-box {
-      margin-top: 12px;
-      padding: 10px;
       border: 1px dashed var(--border);
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
+      padding: 10px;
       display: grid;
       gap: 8px;
+      background: #10141c;
     }
 
     .link-row { display: flex; gap: 10px; align-items: center; }
     .link-text {
       flex: 1;
       padding: 8px 10px;
-      background: rgba(255, 255, 255, 0.04);
+      background: #0f141c;
       border: 1px solid var(--border);
       border-radius: 10px;
       color: var(--muted);
@@ -108,67 +155,62 @@
       font-size: 0.95rem;
     }
 
-    .demo-box {
-      margin-top: 16px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.02);
+    .demo-status { color: var(--muted); font-size: 0.95rem; }
+    .progress { height: 6px; border-radius: 999px; background: rgba(148, 163, 184, 0.1); overflow: hidden; margin-top: 8px; }
+    .fill { height: 100%; width: 0%; background: linear-gradient(90deg, #0ea371, #1dd197); transition: width 240ms ease; }
+
+    @media (max-width: 720px) {
+      body { padding: 12px; }
+      textarea { min-height: 110px; }
     }
-
-    .status { display: flex; gap: 8px; align-items: center; color: var(--muted); }
-    .status strong { color: var(--text); }
-
-    .timeline { margin-top: 10px; height: 6px; border-radius: 999px; background: rgba(148, 163, 184, 0.1); overflow: hidden; }
-    .fill { height: 100%; width: 0%; background: linear-gradient(90deg, #22d3ee, #a855f7); transition: width 240ms ease; }
-
-    .preview {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(34, 211, 238, 0.45);
-      background: rgba(34, 211, 238, 0.08);
-      color: #def9ff;
-      font-size: 0.95rem;
-      white-space: pre-wrap;
-    }
-
-    .demo-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-    .ghost { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
   </style>
 </head>
 <body>
-  <div class="shell">
+  <div class="app">
     <header>
       <div class="logo"><span>gptit</span></div>
     </header>
 
-    <div id="home" hidden>
-      <h1>Cria o link gptit</h1>
-      <p>Uma caixa de texto, dois botões. Gera o link ou testa já.</p>
-      <label for="prompt">Prompt</label>
-      <textarea id="prompt" placeholder="Explica-me como montar um plano semanal com 30€."></textarea>
-      <div class="buttons">
-        <button id="makeLink">Gerar link</button>
-        <button class="secondary" id="test">Testar</button>
-      </div>
-      <div class="link-box" id="linkBox" hidden>
-        <div class="link-row">
-          <div class="link-text" id="linkText"></div>
-          <button class="secondary" id="copyLink">Copiar</button>
+    <div class="chat-window" id="home" hidden>
+      <div class="chat-messages">
+        <div class="message">
+          <div class="bubble system">
+            Escreve o prompt e gera um link gptit. Se preferires, testa já a reprodução com o botão “Testar”.
+          </div>
         </div>
-        <div class="buttons">
-          <a class="ghost" id="openDemo" href="#" target="_blank" rel="noopener noreferrer">Abrir demo em novo separador</a>
+      </div>
+      <div class="composer">
+        <textarea id="prompt" placeholder="Explica-me como montar um plano semanal com 30€."></textarea>
+        <div class="actions">
+          <button id="makeLink">Gerar link</button>
+          <button class="secondary" id="test">Testar</button>
+        </div>
+        <div class="link-box" id="linkBox" hidden>
+          <div class="link-row">
+            <div class="link-text" id="linkText"></div>
+            <button class="secondary" id="copyLink">Copiar</button>
+          </div>
+          <div class="actions">
+            <a class="ghost" id="openDemo" href="#" target="_blank" rel="noopener noreferrer">Abrir demo em novo separador</a>
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="demo" hidden>
-      <div class="demo-box">
-        <div class="status"><strong>Status:</strong> <span id="status">A preparar…</span></div>
-        <div class="timeline"><div class="fill" id="fill"></div></div>
-        <div class="preview" id="preview" hidden></div>
-        <div class="demo-actions">
+    <div class="chat-window" id="demo" hidden>
+      <div class="chat-messages">
+        <div class="message">
+          <div class="bubble system demo-status">
+            <strong>Status:</strong> <span id="status">A preparar…</span>
+            <div class="progress"><div class="fill" id="fill"></div></div>
+          </div>
+        </div>
+        <div class="message" id="previewRow" hidden>
+          <div class="bubble user" id="preview"></div>
+        </div>
+      </div>
+      <div class="composer">
+        <div class="actions">
           <a class="ghost" id="openChat" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">Abrir no ChatGPT</a>
           <button class="secondary" id="reset">Limpar e voltar</button>
         </div>
@@ -193,6 +235,7 @@
     const statusEl = document.getElementById('status');
     const fill = document.getElementById('fill');
     const preview = document.getElementById('preview');
+    const previewRow = document.getElementById('previewRow');
     const openChat = document.getElementById('openChat');
     const resetBtn = document.getElementById('reset');
 
@@ -215,6 +258,7 @@
       fill.style.width = '0%';
       statusEl.textContent = 'A preparar…';
       preview.hidden = true;
+      previewRow.hidden = true;
       preview.textContent = '';
     };
 
@@ -266,6 +310,7 @@
             if (index === steps.length - 1) {
               preview.textContent = prompt;
               preview.hidden = false;
+              previewRow.hidden = false;
               statusEl.textContent = 'Tudo pronto. Abre no ChatGPT ou limpa para voltar.';
             } else {
               steps[index + 1]?.__timer?.();
@@ -315,6 +360,8 @@
       showDemo();
       const prompt = prePrompt;
       preview.textContent = prompt;
+      preview.hidden = false;
+      previewRow.hidden = false;
       openChat.href = `https://chatgpt.com/?q=${encodeURIComponent(prompt)}`;
       runSteps(prompt);
     } else {
