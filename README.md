@@ -1,9 +1,9 @@
 # gptit
 
-Uma página única ao estilo do letmegooglethat.com para o ChatGPT.
+Uma página simples para criar links gptit que reproduzem o “digitar no ChatGPT” e abrem a conversa.
 
 ## Como usar
 1. Abre `index.html` no navegador.
-2. Escreve um prompt e carrega em **Gerar link gptit**.
-3. Copia o link partilhável ou clica em **Abrir no ChatGPT** para testar o “free fire” direto.
-4. Partilha o link para mostrar automaticamente o percurso até ao ChatGPT.
+2. Escreve o prompt.
+3. Carrega em **Gerar link** (mostra o link partilhável) ou em **Testar** (abre a página de demo com o prompt).
+4. Na página de demo podes abrir no ChatGPT ou limpar para voltar ao ecrã inicial.
